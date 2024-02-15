@@ -1,0 +1,10 @@
+export class Type {
+  public id: number ;
+  public name: string | undefined;
+  public repImage: string | undefined;
+
+  constructor(id:number, name: string) {
+    this.id = id;
+    this.name = name;
+  }
+}

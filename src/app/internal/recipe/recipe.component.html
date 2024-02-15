@@ -1,0 +1,85 @@
+<section class="text-gray-600 body-font bg-lime-200 rounded-b-3xl relative">
+  <!-- Botón en la esquina superior derecha -->
+  <a [href]="recipe.originalHref" target="_blank" class="absolute top-0 right-2 mt-4 mr-4 px-4 py-2 border-2 border-gray-900 rounded-lg flex items-center">
+    <span class="mr-2">{{ recipe.originalTitle }}</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="m13 3 3.293 3.293-7 7 1.414 1.414 7-7L21 11V3z"></path><path d="M19 19H5V5h7l-2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2h14c1.103 0 2-.897 2-2v-5l-2-2v7z"></path></svg>
+  </a>
+
+  <div class="container px-5 py-12 mx-auto flex flex-wrap flex-col items-center">
+    <img class="xl:w-2/3 lg:w-3/4 md:w-full w-full mb-10 object-cover object-center rounded-3xl" alt="hero" [src]="recipe.repImage">
+    <div class="text-center w-full">
+      <h1 class="text-4xl font-medium title-font mb-4 text-gray-900">{{ recipe.name }}</h1>
+      <hr class="mt-6 mb-4 mx-auto border-t-2 w-16 border-gray-900">
+    </div>
+  </div>
+</section>
+
+
+<div class="rating">
+  <input type="radio" id="star5" name="rating" [checked]="rating <= 5" hidden>
+  <label for="star5" title="5 stars">&#9733;</label>
+  <input type="radio" id="star4" name="rating" [checked]="rating <= 4" hidden>
+  <label for="star4" title="4 stars">&#9733;</label>
+  <input type="radio" id="star3" name="rating" [checked]="rating <= 3" hidden>
+  <label for="star3" title="3 stars">&#9733;</label>
+  <input type="radio" id="star2" name="rating" [checked]="rating <= 2" hidden>
+  <label for="star2" title="2 stars">&#9733;</label>
+  <input type="radio" id="star1" name="rating" [checked]="rating <= 1" hidden>
+  <label for="star1" title="1 star">&#9733;</label>
+</div>
+
+
+
+
+
+<section class="text-gray-600 body-font ">
+  <div class="container px-5 py-12 mx-auto flex flex-wrap flex-col items-center">
+    <h2 class="text-3xl font-medium title-font mb-4 text-gray-900">Ingredientes</h2>
+    <ul class="grid grid-cols-2 gap-4 list-none text-lg text-gray-700 mb-6">
+      @for (item of recipeIngredient; track item.id) {
+        <li class="flex items-center p-4">
+          <img class="w-14 h-14 mr-2" src="{{ item.ingredient?.repImage }}" alt=""> <!-- Ajusta el tamaño a 50x50px -->
+          <span>{{item.quantity}} {{ item.ingredient?.name }}</span>
+        </li>
+      }
+    </ul>
+
+
+    <h2 class="text-3xl font-medium title-font mb-4 text-gray-900">Instrucciones</h2>
+    <div [innerHTML]="recipe.step"></div>
+
+    <div class="text-center w-full mt-4">
+      <p class="lg:w-2/3 mx-auto leading-relaxed text-base">¡Disfruta de tu deliciosa receta!</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <h1 class="text-3xl font-medium title-font text-gray-900 mb-12 text-center">Opiniones</h1>
+    <div class="flex flex-wrap -m-4">
+
+
+      @for (item of testimonials; track item.id) {
+
+
+      <div class="p-4 md:w-1/2 w-full">
+        <div class="h-full bg-gray-100 p-8 rounded">
+
+          <p class="leading-relaxed mb-6">{{ item.testimonial }}</p>
+          <a class="inline-flex items-center">
+            <img alt="testimonial" src="https://png.pngtree.com/png-clipart/20210309/original/pngtree-cute-couple-bear-with-love-png-image_5810648.jpg" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+            <span class="flex-grow flex flex-col pl-4">
+              <span class="title-font font-medium text-gray-900">{{ item.name }}</span>
+             </span>
+          </a>
+        </div>
+      </div>
+      }
+  </div>
+
+  </div>
+
+
+</section>

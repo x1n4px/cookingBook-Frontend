@@ -1,0 +1,32 @@
+<section class="text-gray-600 body-font ">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="sm:text-6xl text-4xl font-medium title-font mb-4 text-lime-600 underline">Selecciona el tipo de receta</h1>
+    </div>
+    <div class="container mx-auto">
+      <div class="flex flex-wrap justify-center -mx-4">
+        <!-- Aquí comienza cada fila -->
+        @for (item of type; track item.id) {
+          <div class="w-full md:w-1/3 px-2 mb-4 rounded-md cursor-pointer transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300" (click)="routeTo(item.name)">
+            <div class="relative" style="width: 300px; height: 300px;">
+              <div class=" overflow-hidden border-[8px] border-lime-200" style="width: 100%; height: 100%;">
+                <img [src]="item.repImage" alt="Imagen 1" class="w-full h-full object-cover ">
+              </div>
+              <div class="absolute top-0 left-0 w-full h-full flex items-center justify-center glass">
+                <div class="p-4">
+                  <h2 class="text-3xl text-white font-semibold drop-shadow-lg">{{item.name}}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        }
+
+
+      </div>
+    </div>
+
+
+  </div>
+</section>
