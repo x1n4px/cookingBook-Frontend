@@ -38,7 +38,6 @@ export class MenuComponent implements  OnInit{
     )
   }
   routeTo(str: String|undefined) {
-    console.log(str);
     this.router.navigate(['tipo/', str])
   }
 }

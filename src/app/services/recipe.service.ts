@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import {Recipe} from "../classes/recipe";
 import {RecipeIngredient} from "../classes/recipeIngredient";
 import {Testimonials} from "../classes/testimonials";
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -23,15 +24,15 @@ export class RecipeService {
 
 
   getAll():Observable<Recipe[]>{
-    return this.http.get<Recipe[]>('http://localhost:8080/api/recipe');
+    return this.http.get<Recipe[]>(environment.apiUrl + `/recipe`);
   }
 
   getByType(type: string):Observable<Recipe[]>{
-    return this.http.get<Recipe[]>(`http://localhost:8080/api/recipe/${type}`);
+    return this.http.get<Recipe[]>(environment.apiUrl + `/recipe/${type}`);
   }
 
   getById(id:string|undefined|null): Observable<Recipe> {
-    return this.http.get<Recipe>(`http://localhost:8080/api/recipe/id/${id}`);
+    return this.http.get<Recipe>(environment.apiUrl + `/recipe/id/${id}`);
   }
 
   getIngredient(id:string|undefined|null): Observable<RecipeIngredient[]> {
@@ -41,5 +42,10 @@ export class RecipeService {
   getTestimonials(id:string|undefined|null): Observable<Testimonials[]> {
     return this.http.get<Testimonials[]>(`http://localhost:8080/api/recipe/${id}/testimonials`);
   }
+
+  create(recipe: Recipe): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + `/recipe`, recipe);
+  }
+
 
 }

@@ -1,0 +1,106 @@
+<div class="flex flex-col items-center my-4 h-screen">
+  <div class="bg-white shadow-md p-8 rounded-md   w-7/10">
+    <h2 class="text-center text-2xl mb-4">Crear receta</h2>
+    <form #myform = "ngForm" (ngSubmit)="create()">
+      <div class="mb-4">
+        <label for="nombre" class="block mb-2 text-sm font-medium">Nombre</label>
+        <input type="text" id="nombre" name="nombre" [(ngModel)]="newRecipe.name" ngModel
+         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+      </div>
+      <div class="mb-4">
+        <label for="pasos" class="block mb-2 text-sm font-medium">Pasos</label>
+        <textarea id="pasos" name="pasos" [(ngModel)]="newRecipe.step" ngModel
+         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required></textarea>
+      </div>
+      <div class="mb-4">
+        <label for="repImage" class="block mb-2 text-sm font-medium">repImage</label>
+        <input type="text" id="repImage" name="repImage" [(ngModel)]="newRecipe.repImage" ngModel
+         class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+      </div>
+      <div class="mb-4">
+        <label for="originalHref" class="block mb-2 text-sm font-medium">originalHref</label>
+        <input type="text" id="originalHref" name="originalHref" [(ngModel)]="newRecipe.originalHref" ngModel
+        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+      </div>
+      <div class="mb-4">
+        <label for="originalTitle" class="block mb-2 text-sm font-medium">originalTitle</label>
+        <input type="text" id="originalTitle" name="originalTitle" [(ngModel)]="newRecipe.originalTitle" ngModel
+        class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+      </div>
+
+      <div class="mb-4">
+        @for (item of type; track item.id) {
+          <button type="button"
+                  (click)="onButtonClick(item)"
+                  [class]="{'bg-lime-600': isItemSelected(item), 'bg-lime-300': !isItemSelected(item)}"
+                  class="hover:bg-lime-300 font-bold py-2 px-4 rounded-lg mx-2 my-2 text-gray-900">
+            {{ item.name }}
+          </button>
+        }
+      </div>
+
+
+      <div class="mb-4">
+        <select
+          id="selectIngredients"
+          name="selectIngredients"
+          [(ngModel)]="selectIngredients"
+          [compareWith]="compareById"
+          class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+        >
+          <option [ngValue]="undefined" selected>Selecciona un ingrediente</option>
+          @for( ingredient of ingredients; track ingredient.id) {
+            <option [ngValue]="ingredient">{{ ingredient.name }}</option>
+          }
+        </select>
+
+
+        <div class="mt-4 flex flex-row items-center">
+          <input type="text" id="quantity" [(ngModel)]="quantity" name="quantity" placeholder="Nuevo ingrediente" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+          <button type="button" (click)="addIngredient()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg ml-2">
+            +
+          </button>
+        </div>
+
+
+
+
+        <div class="relative overflow-x-auto my-10">
+          <table class="w-full text-sm text-left rtl:text-right ">
+            <thead class="text-xs text-gray-700 uppercase">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                Cantidad
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Ingrediente
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            @for (item of recipeIngredient; track item.id) {
+              <tr class="bg-white border-black">
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap  ">
+                  {{ item.quantity }}
+                </td>
+                <td class="px-6 py-4">
+                  {{ item.ingredient?.name }}
+                </td>
+              </tr>
+            }
+
+
+            </tbody>
+          </table>
+        </div>
+
+
+      </div>
+
+
+
+
+      <button type="submit"  class="bg-lime-200 hover:bg-lime-500 font-bold py-2 px-4 rounded-lg w-full text-gray-800 ">Enviar</button>
+    </form>
+  </div>
+</div>

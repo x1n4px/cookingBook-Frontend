@@ -7,6 +7,7 @@ import { TestBed } from '@angular/core/testing';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Type } from '../classes/type';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,6 @@ export class TypeService {
 
 
   getAll():Observable<Type[]>{
-    return this.http.get<Type[]>('http://localhost:8080/api/type');
+    return this.http.get<Type[]>( environment.apiUrl + '/types');
   }
 }

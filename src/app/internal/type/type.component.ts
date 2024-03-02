@@ -25,7 +25,6 @@ export class TypeComponent {
     this.type = this.route.snapshot.paramMap.get('type');
 
     if(this.type !== 'all') {
-      console.log(this.type);
       this.getByType(this.type);
     }else{
       this.getAll();
